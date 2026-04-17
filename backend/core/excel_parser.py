@@ -55,8 +55,16 @@ class ExcelProcessor:
                 return None
                 
             ws = wb[target_sheet]
+            empty_streak = 0
             for row in ws.iter_rows(values_only=True):
-                cells.append(list(row))
+                row_list = list(row)
+                if all(v is None for v in row_list):
+                    empty_streak += 1
+                    if empty_streak > 20:
+                        break
+                else:
+                    empty_streak = 0
+                    cells.append(row_list)
             wb.close()
             
         return cells
