@@ -27,6 +27,11 @@ class NameAnalyzer:
         oran = max(normal_oran, normalize_oran)
 
         if oran >= BENZERLIK_ESIGI:
+            i1_ws = ' '.join(i1.split())
+            i2_ws = ' '.join(i2.split())
+            if i1_ws == i2_ws:
+                return oran, True, "Fazla/eksik boşluk"
+
             farklar = []
             if n1 == n2 and i1 != i2:
                 farklar.append("Türkçe karakter farkı")
@@ -76,6 +81,7 @@ class FileNumberAnalyzer:
                         "benzerlik_yuzde": int(oran * 100),
                         "yazim_hatasi": yazim_hatasi,
                         "hata_nedeni": detay,
+                        "bosluk_farki": detay == "Fazla/eksik boşluk",
                     })
             else:
                 numara_isim[dosya_no_str] = (isim_str, excel_satir, form_sirasi)

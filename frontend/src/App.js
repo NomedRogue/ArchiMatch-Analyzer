@@ -92,6 +92,28 @@ function App() {
     window.close();
   };
 
+  const renderNameWithSpaces = (name) => {
+    const parts = [];
+    let i = 0;
+    while (i < name.length) {
+      if (name[i] === ' ') {
+        let count = 0;
+        while (i < name.length && name[i] === ' ') { count++; i++; }
+        if (count > 1) {
+          parts.push(<span key={`sp-${i}`} className="bg-orange-400 text-white font-bold px-0.5 rounded-sm mx-px tracking-widest">{'·'.repeat(count)}</span>);
+        } else {
+          parts.push(<span key={`sp-${i}`}>{' '}</span>);
+        }
+      } else {
+        let word = '';
+        const start = i;
+        while (i < name.length && name[i] !== ' ') { word += name[i]; i++; }
+        parts.push(<span key={`w-${start}`}>{word}</span>);
+      }
+    }
+    return <span className="font-mono">{parts}</span>;
+  };
+
   const highlightBadDatePart = (value, errorType) => {
     if (!value) return null;
     
@@ -379,8 +401,8 @@ function App() {
                               <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold w-24">Hasta Dosya Numarası</th>
                               <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">Uyuşmazlık Nedeni</th>
                               <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">Algoritma Kararı</th>
-                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">Önceki Kayıt / Geçiş Yapan</th>
-                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">Hatalı Seçilen Geçerli Kayıt</th>
+                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">1. Kayıt</th>
+                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">2. Kayıt</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50 print:divide-slate-300">
@@ -400,14 +422,14 @@ function App() {
                                 </td>
                                 <td className="px-4 py-3">
                                   <div className="font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 p-2 rounded border border-slate-100 dark:border-slate-700">
-                                    {err.hasta_1}
+                                    {err.bosluk_farki ? renderNameWithSpaces(err.hasta_1) : err.hasta_1}
                                     <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Sıra: <span className="font-medium text-slate-700 dark:text-slate-300">{err.hasta_1_form_sirasi || "-"}</span></div>
                                   </div>
                                 </td>
                                 <td className="px-4 py-3">
-                                  <div className="font-semibold text-rose-700 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/30 p-2 rounded border border-rose-100 dark:border-rose-900/50">
-                                    {err.hasta_2}
-                                    <div className="text-xs text-rose-500/70 dark:text-rose-400/70 mt-1">Sıra: <span className="font-medium text-rose-600 dark:text-rose-400">{err.hasta_2_form_sirasi || "-"}</span></div>
+                                  <div className="font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 p-2 rounded border border-slate-100 dark:border-slate-700">
+                                    {err.bosluk_farki ? renderNameWithSpaces(err.hasta_2) : err.hasta_2}
+                                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Sıra: <span className="font-medium text-slate-700 dark:text-slate-300">{err.hasta_2_form_sirasi || "-"}</span></div>
                                   </div>
                                 </td>
                               </tr>
