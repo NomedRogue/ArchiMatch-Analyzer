@@ -83,13 +83,9 @@ function App() {
     setError(null);
   };
 
-  const shutdownApp = async () => {
-    try {
-      await axios.post(`${API_BASE}/shutdown`);
-    } catch (e) {
-      // API fail is okay as it just exited
-    }
-    window.close();
+  const shutdownApp = () => {
+    axios.post(`${API_BASE}/shutdown`).catch(() => {});
+    setTimeout(() => window.close(), 300);
   };
 
   const renderNameWithSpaces = (name) => {

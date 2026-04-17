@@ -38,7 +38,7 @@ def serve_frontend(full_path: str):
     # SPA yönlendirmesi
     index_path = os.path.join(FRONTEND_DIR, "index.html")
     if os.path.exists(index_path):
-        return FileResponse(index_path)
+        return FileResponse(index_path, headers={"Cache-Control": "no-cache, no-store, must-revalidate"})
     return {"error": "Frontend build dosyaları bulunamadı. Lütfen npm run build komutunu çalıştırın."}
 
 
