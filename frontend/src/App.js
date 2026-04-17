@@ -398,39 +398,36 @@ function App() {
                         <table className="w-full text-left text-sm print:text-xs">
                           <thead className="bg-slate-50 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 transition-colors">
                             <tr>
-                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold w-24">Hasta Dosya Numarası</th>
-                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">Uyuşmazlık Nedeni</th>
-                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">Algoritma Kararı</th>
-                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">1. Kayıt</th>
-                              <th className="px-4 py-3 text-slate-600 dark:text-slate-300 font-semibold">2. Kayıt</th>
+                              <th className="px-3 py-3 text-slate-600 dark:text-slate-300 font-semibold w-24">Dosya No</th>
+                              <th className="px-3 py-3 text-slate-600 dark:text-slate-300 font-semibold">Uyuşmazlık Nedeni</th>
+                              <th className="px-3 py-3 text-slate-600 dark:text-slate-300 font-semibold">Karar</th>
+                              <th className="px-3 py-3 text-slate-600 dark:text-slate-300 font-semibold text-center">Benzerlik</th>
+                              <th className="px-3 py-3 text-slate-600 dark:text-slate-300 font-semibold text-center">1. Sıra</th>
+                              <th className="px-3 py-3 text-slate-600 dark:text-slate-300 font-semibold">1. Kayıt</th>
+                              <th className="px-3 py-3 text-slate-600 dark:text-slate-300 font-semibold text-center">2. Sıra</th>
+                              <th className="px-3 py-3 text-slate-600 dark:text-slate-300 font-semibold">2. Kayıt</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-slate-100 dark:divide-slate-800/50 print:divide-slate-300">
                             {result.numara_hatalari.map((err, i) => (
                               <tr key={i} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-                                <td className="px-4 py-3 font-mono font-bold text-slate-800 dark:text-slate-200">{err.dosya_no}</td>
-                                <td className="px-4 py-3 font-medium text-rose-600 dark:text-rose-400">{err.hata_nedeni}</td>
-                                <td className="px-4 py-3">
-                                  <div className="flex flex-col">
-                                    {err.yazim_hatasi ? (
-                                      <span className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 rounded-md inline-block max-w-max">Muhtemel Yazım Hatası</span>
-                                    ) : (
-                                      <span className="text-xs px-2 py-1 bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded-md inline-block max-w-max">Farklı Hasta Girişi</span>
-                                    )}
-                                    <span className="text-xs mt-1 text-slate-500 dark:text-slate-400 font-medium">Benzerlik: %{err.benzerlik_yuzde}</span>
-                                  </div>
+                                <td className="px-3 py-2 font-mono font-bold text-slate-800 dark:text-slate-200">{err.dosya_no}</td>
+                                <td className="px-3 py-2 font-medium text-rose-600 dark:text-rose-400">{err.hata_nedeni}</td>
+                                <td className="px-3 py-2">
+                                  {err.yazim_hatasi ? (
+                                    <span className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 rounded-md inline-block">Muhtemel Yazım Hatası</span>
+                                  ) : (
+                                    <span className="text-xs px-2 py-1 bg-rose-100 dark:bg-rose-500/20 text-rose-700 dark:text-rose-400 rounded-md inline-block">Farklı Hasta Girişi</span>
+                                  )}
                                 </td>
-                                <td className="px-4 py-3">
-                                  <div className="font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 p-2 rounded border border-slate-100 dark:border-slate-700">
-                                    {err.bosluk_farki ? renderNameWithSpaces(err.hasta_1) : err.hasta_1}
-                                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Sıra: <span className="font-medium text-slate-700 dark:text-slate-300">{err.hasta_1_form_sirasi || "-"}</span></div>
-                                  </div>
+                                <td className="px-3 py-2 text-center font-medium text-slate-600 dark:text-slate-300">%{err.benzerlik_yuzde}</td>
+                                <td className="px-3 py-2 text-center text-slate-500 dark:text-slate-400">{err.hasta_1_form_sirasi || "-"}</td>
+                                <td className="px-3 py-2 font-semibold text-slate-700 dark:text-slate-200">
+                                  {err.bosluk_farki ? renderNameWithSpaces(err.hasta_1) : err.hasta_1}
                                 </td>
-                                <td className="px-4 py-3">
-                                  <div className="font-semibold text-slate-700 dark:text-slate-200 bg-slate-50 dark:bg-slate-800/50 p-2 rounded border border-slate-100 dark:border-slate-700">
-                                    {err.bosluk_farki ? renderNameWithSpaces(err.hasta_2) : err.hasta_2}
-                                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">Sıra: <span className="font-medium text-slate-700 dark:text-slate-300">{err.hasta_2_form_sirasi || "-"}</span></div>
-                                  </div>
+                                <td className="px-3 py-2 text-center text-slate-500 dark:text-slate-400">{err.hasta_2_form_sirasi || "-"}</td>
+                                <td className="px-3 py-2 font-semibold text-slate-700 dark:text-slate-200">
+                                  {err.bosluk_farki ? renderNameWithSpaces(err.hasta_2) : err.hasta_2}
                                 </td>
                               </tr>
                             ))}
