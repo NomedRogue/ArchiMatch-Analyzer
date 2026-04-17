@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background-color: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 1cm 1cm 0 1cm !important; /* Alt tarafta sarkan dolgu boş sayfa yaratmasın diye 0 yapıldı */
+    overflow: visible !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  * {
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-text-dark {
+    color: black !important;
+  }
+  
+  .print-border-solid {
+    border-color: #ccc !important;
+  }
+
+  /* Tabloların kesilmesini önlemek ve küçültmek için */
+  table {
+    width: 100% !important;
+    page-break-inside: auto;
+  }
+  
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  th, td {
+    font-size: 11px !important;
+    padding: 6px 4px !important;
+    word-break: break-word;
+  }
+}
+

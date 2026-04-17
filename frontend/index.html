@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchiMatch Analyzer</title>
+    <!-- Tailwind CSS v4 (Browser Version) -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel (Stand-alone for JSX) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Inter, sans-serif;
+            background-color: #0f172a;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="h-screen flex flex-col antialiased">
+    <div id="root" class="flex-grow flex items-center justify-center"></div>
+
+    <!-- App Logic -->
+    <script type="text/babel">
+        function App() {
+            return (
+                <div className="p-8 max-w-lg w-full bg-slate-800 rounded-2xl shadow-2xl border border-slate-700">
+                    <h1 className="text-3xl font-extrabold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent mb-4">
+                        ArchiMatch Analyzer
+                    </h1>
+                    <p className="text-slate-400 mb-6">
+                        Uygulama Denetimi (WDAC) engeline takılmayan tam bağımsız mimari aktif edildi. Node.js derleyicilerine ihtiyaç kalmadı!
+                    </p>
+                    <div className="p-8 border-2 border-dashed border-slate-600 rounded-xl text-center bg-slate-800/50 hover:bg-slate-700/50 transition-colors cursor-pointer group">
+                        <span className="text-slate-300 font-medium group-hover:text-cyan-300 transition-colors">Dosya yüklemek için Sürükleyin veya Tıklayın</span>
+                    </div>
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+
+</html>
